@@ -19,9 +19,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "${mainVersion}-${buildNumber}" + getBuildNumber()
-group = "blusunrize"
+group = "candlecove"
 def archiveGroup = group
-archivesBaseName = "ImmersiveEngineering"
+archivesBaseName = "OrganicPaths"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -115,10 +115,10 @@ task coreJar(type: Jar) {
     from(sourceSets.main.output) {
         // Don't include the coremod in the main mod
         // If you have more coremod-related packages that aren't nested in the main one, add exclusions for them
-        include 'blusunrize/immersiveengineering/common/asm/**'
+        include 'candlecove/organicpaths/common/asm/**'
     }
     manifest {
-        attributes "FMLCorePlugin": "blusunrize.immersiveengineering.common.asm.IELoadingPlugin"
+        attributes "FMLCorePlugin": "candlecove.organicpaths.common.asm.OPLoadingPlugin"
         attributes 'Maven-Artifact': archiveGroup + ':' + archivesBaseName + '-core:' + version
     }
     // Add a classifier to the JAR ('-core' at the end of the file name)
@@ -162,10 +162,10 @@ def libPrefix = 'META-INF/libraries'
 jar {
     manifest {
         attributes 'ContainedDeps': libPrefix + '/' + coreJar.archivePath.name
-        attributes "FMLAT": "ImmersiveEngineering_at.cfg"
+        attributes "FMLAT": "OgranicPaths_at.cfg"
         attributes 'Maven-Artifact': archiveGroup + ':' + archivesBaseName + ':' + version
     }
-    exclude 'blusunrize/immersiveengineering/common/asm/**'
+    exclude 'candlecove/organicpaths/common/asm/**'
     // Add the output of the mod JAR task to the main JAR for later extraction
     from(coreJar.archivePath.absolutePath) {
         include '*' // Due to the way Gradle's copy tasks work, we need this line for the JAR to get added
@@ -176,8 +176,8 @@ jar {
 sourceSets {
     main {
         java {
-//            exclude 'blusunrize/immersiveengineering/common/util/compat/opencomputers/**'
-//            exclude 'blusunrize/immersiveengineering/common/util/compat/waila/**'
+//            exclude 'candlecove/organicpaths/common/util/compat/opencomputers/**'
+//            exclude 'candlecove/organicpaths/common/util/compat/waila/**'
         }
     }
 }
@@ -205,20 +205,20 @@ task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
     manifest {
-        attributes 'FMLAT': 'ImmersiveEngineering_at.cfg'
+        attributes 'FMLAT': 'OrganicPaths_at.cfg'
         attributes 'Maven-Artifact': group + ':' + archivesBaseName + ':' + version
     }
 }
 
 task apiZip(type: Zip) {
     from(sourceSets.main.java) {
-        include "blusunrize/immersiveengineering/api/**"
+        include "candlecove/organicpaths/api/**"
     }
     classifier = 'api'
 }
 task apiJar(type: Jar) {
     from(sourceSets.main.java) {
-        include "blusunrize/immersiveengineering/api/**"
+        include "candlecove/organicpaths/api/**"
     }
     classifier = 'api'
 }
@@ -244,19 +244,19 @@ uploadArchives {
                     description project.archivesBaseName
                     url ''
                     scm {
-                        url 'https://github.com/BluSunrize/ImmersiveEngineering'
-                        connection 'scm:git:git@github.com/BluSunrize/ImmersiveEngineering.git'
-                        developerConnection 'scm:git:git@github.com/BluSunrize/ImmersiveEngineering.git'
+                        url 'https://github.com/Svengali/OrganicPaths'
+                        connection 'scm:git:git@github.com//Svengali/OrganicPaths.git'
+                        developerConnection 'scm:git:git@github.com/Svengali/OrganicPaths.git'
                     }
                     issueManagement {
                         system 'github'
-                        url 'https://github.com/BluSunrize/ImmersiveEngineering/issues'
+                        url 'https://github.com/Svengali/OrganicPaths/issues'
                     }
 
                     developers {
                         developer {
-                            id 'BluSunrize'
-                            name 'BluSunrize'
+                            id 'Candlecove'
+                            name 'Candlecove'
                             roles { role 'developer' }
                         }
                     }
@@ -288,7 +288,7 @@ class GenerateUpdateJSON extends DefaultTask {
     }
     static def VERSION_PREFIX = "##### Version "
     static def CURRENT_MC_VERSION = "1.12.2"
-    static def CHANGELOG_FOR_MANUAL = "src/main/resources/assets/immersiveengineering/changelog.json"
+    static def CHANGELOG_FOR_MANUAL = "src/main/resources/assets/organicpaths/changelog.json"
     static def BUILT_SUFFIX = " - BUILT"
     static def RECOMMENDED = "-recommended"
     static def LATEST = "-latest"

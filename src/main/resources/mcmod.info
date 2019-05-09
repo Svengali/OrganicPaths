@@ -1,12 +1,12 @@
 [
 {
-  "modid": "<lowercasename>",
-  "name": "<pretty name>",
-  "description": "",
+  "modid": "organicpaths",
+  "name": "Organic Paths",
+  "description": "Creates paths from where players walk",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "<url>",
-  "authorList": ["",""],
+  "url": "https://github.com/Svengali/OrganicPaths",
+  "authorList": ["Svengali"],
   "credits": "",
   "logoFile": "assets/immersiveengineering/logo.png",
   "screenshots": [],
