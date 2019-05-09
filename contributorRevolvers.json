@@ -1,0 +1,4 @@
+{
+  "uuid":["f34afdfb-996b-4020-b8a2-b740e2937b29"],
+  "tag":"test", "flavour":"", "baseUpgrades":{"melee":10.0}, "renderAdditions":["bayonet_attachment","dev_bayonet","dev_scope"]
+}

@@ -1,0 +1,15 @@
+[
+{
+  "modid": "<lowercasename>",
+  "name": "<pretty name>",
+  "description": "",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "<url>",
+  "authorList": ["",""],
+  "credits": "",
+  "logoFile": "assets/immersiveengineering/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
