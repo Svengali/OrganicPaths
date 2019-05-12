@@ -1,0 +1,9 @@
+{
+	"forge_marker": 1,
+	"parent": "block/cube_all",
+	"variants": {
+		"dirt": { "model": "block/cube_all" },
+		"coarse_dirt": { "model": "block/cube_all" },
+		"podzol": { "model": "block/cube_all" }
+	}
+}
