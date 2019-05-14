@@ -1,0 +1,9 @@
+
+
+
+
+//include '../..third_party/SpongeForge'
+
+//project(':spongeforge').projectDir = new File('../../third_party/SpongeForge')
+
+

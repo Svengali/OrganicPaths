@@ -36,6 +36,8 @@ compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
+
+
 minecraft {
     version = "1.12.2-14.23.5.2825"
     runDir = "run"
@@ -50,6 +52,12 @@ minecraft {
 }
 
 dependencies {
+
+	//includeBuild "../../third_party/SpongeForge"
+
+
+    //compile project(':spongeforge')
+
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
