@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent
 import net.minecraftforge.registries.IForgeRegistry
 
 import scala.collection.{immutable => imm}
+import scala.util.Random
 
 
 @Mod( modid = OrganicPaths.MODID, version = OrganicPaths.VERSION, modLanguage = "scala" )
@@ -28,6 +29,10 @@ import scala.collection.{immutable => imm}
 object OrganicPaths  {
 	final val MODID = "organicpaths"
 	final val VERSION = "0.1"
+
+	val s_rand = new Random()
+
+
 
 	@EventHandler
 	def postInit(event: FMLPreInitializationEvent): Unit = {
@@ -45,7 +50,7 @@ object OrganicPaths  {
 
 	}
 
-	var CompressedDirt = new CompressedDirt
+	//var CompressedDirt = new CompressedDirt
 
 
 
@@ -54,10 +59,10 @@ object OrganicPaths  {
 
 		println( s"Registering new blocks" )
 
-		event.getRegistry.register( CompressedDirt )
-		//event.getRegistry.register( new CompressibleDirt )
-
-		var key = event.getRegistry.getKey( CompressedDirt )
+		event.getRegistry.register( PathBlocks.CompressedDirt_01 )
+		event.getRegistry.register( PathBlocks.CompressedDirt_02 )
+		event.getRegistry.register( PathBlocks.CompressedDirt_03 )
+		event.getRegistry.register( PathBlocks.CompressedDirt_04 )
 
 	}
 
@@ -66,8 +71,10 @@ object OrganicPaths  {
 
 		println( s"Registering new blocks" )
 
-		event.getRegistry.register( new AutoItemBlock( new CompressedDirt ) )
-		//event.getRegistry.register( new AutoItemBlock( new CompressibleDirt ) )
+		event.getRegistry.register( new AutoItemBlock( new CompressedDirt_01 ) )
+		event.getRegistry.register( new AutoItemBlock( new CompressedDirt_02 ) )
+		event.getRegistry.register( new AutoItemBlock( new CompressedDirt_03 ) )
+		event.getRegistry.register( new AutoItemBlock( new CompressedDirt_04 ) )
 	}
 
 	import net.minecraft.block.Block
@@ -105,11 +112,18 @@ object OrganicPaths  {
 	@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
 	def onEvent( event: LivingUpdateEvent ): Unit ={
 
-		//println( s"LivingUpdateEvent: $event" )
-
 		val ent = event.getEntityLiving
 
-		if( ent.onGround ) {
+		val blockPath = Blocks.GRASS_PATH
+
+		//val props = blockPath.getBlockState.getProperties
+
+		val dx = Math.abs( ent.posX - ent.prevPosX )
+		val dz = Math.abs( ent.posZ - ent.prevPosZ )
+
+		if( ent.onGround && ( dx > 0.01 || dz > 0.01 ) ) {
+
+			if( s_rand.nextFloat > 0.1f )	return
 
 			val blockPos = ent.getPosition.down
 
@@ -118,7 +132,7 @@ object OrganicPaths  {
 			val name = block.getBlock.getRegistryName
 
 			if( name equals Blocks.GRASS.getRegistryName ) {
-				ent.world.setBlockState( blockPos, CompressedDirt.getDefaultState )
+				ent.world.setBlockState( blockPos, PathBlocks.CompressedDirt_02.getDefaultState )
 			}
 		}
 
